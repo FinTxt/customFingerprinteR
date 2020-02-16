@@ -70,7 +70,7 @@ fingerprint_texts <- function(records, uids, retina_name) {
       unlist()
     # Make document
     sfutils::Document(text = y,
-                     fingerprint = fp,
+                     fingerprint = fp+1,
                      uuid = z)
   }, content(r), records, uids) %>%
     # To Collection
@@ -115,7 +115,7 @@ fingerprint_text <- function(record, retina_name) {
     .[[1]] %>%
     unlist() %>%
     Document(text = record,
-             fingerprint = .)
+             fingerprint = . + 1)
   # Return
   return(out)
 }
