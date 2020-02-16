@@ -29,7 +29,7 @@ set_host <- function(url) {
 #' @importFrom httr content
 #'
 #' @export
-get_retinas <- function() {
+get_custom_retinas <- function() {
   # Retrieve the server host
   serv <- Sys.getenv("CUSTOMFP_SERVER")
   # Get retinas from the api
