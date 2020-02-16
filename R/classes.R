@@ -44,9 +44,6 @@
   # data
   slots = c(
     term = "character",
-    df = "numeric",
-    score = "numeric",
-    pos_types = "list",
     fingerprint = "numeric"
   ),
   # Inherits
@@ -90,9 +87,6 @@ Term <- function(term,
   .Term(
     fp,
     term = term,
-    df = 0.00,
-    score = 0.00,
-    pos_types = list(NA),
-    fingerprint = (fingerprint + 1) # SF positions run from 0:16383 but R indexes from 1
+    fingerprint = (fingerprint) # SF positions run from 0:16383 but R indexes from 1
   )
 }

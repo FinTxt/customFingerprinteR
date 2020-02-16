@@ -39,7 +39,7 @@ get_custom_retinas <- function() {
   return(content(retinas))
 }
 
-#' Function that fingerprints some pieces of text
+#' Function that fingerprints some pieces of text or terms
 #'
 #' @param records list of length k of textual data
 #' @param uids list of length k containing unique identifiers for the textual descriptions.
@@ -68,13 +68,24 @@ fingerprint_texts <- function(records, uids, retina_name) {
     # Get positions
     fp <- x %>%
       unlist()
-    # Make document
-    sfutils::Document(text = y,
-                     fingerprint = fp+1,
-                     uuid = z)
-  }, content(r), records, uids) %>%
-    # To Collection
-    sfutils::as.collection()
+    # If NULL, pass
+    if(is.null(fp)) {
+      return(NULL)
+    }
+    # Make document or term
+    if(nchar(y) >= 50) {
+      sfutils::Document(text = y,
+                        fingerprint = fp,
+                        uuid = z)
+    } else {
+      Term(term = y,
+           fingerprint = fp)
+    }
+
+  }, content(r), records, uids)
+  # Remove empty docs
+  r_ret <- r_ret[map_lgl(r_ret, function(x) !is.null(x))] %>%
+    as.collection()
   # Return
   return(r_ret)
 }
@@ -115,7 +126,7 @@ fingerprint_text <- function(record, retina_name) {
     .[[1]] %>%
     unlist() %>%
     Document(text = record,
-             fingerprint = . + 1)
+             fingerprint = .)
   # Return
   return(out)
 }

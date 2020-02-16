@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{fingerprint_texts}
 \alias{fingerprint_texts}
-\title{Function that fingerprints some pieces of text}
+\title{Function that fingerprints some pieces of text or terms}
 \usage{
 fingerprint_texts(records, uids, retina_name)
 }
@@ -14,5 +14,5 @@ fingerprint_texts(records, uids, retina_name)
 \item{retina_name}{name of the retina you want to use. See the 'get_retinas' function above}
 }
 \description{
-Function that fingerprints some pieces of text
+Function that fingerprints some pieces of text or terms
 }
