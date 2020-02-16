@@ -1,11 +1,25 @@
 Package: customFingerprinteR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Easy fingerprinting of documents using custom retinas
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Jasper Ginn
+Maintainer: Jasper Ginn <jasperginn@gmail.com>
+Description: This package provides an interface to retrieve results from
+    custom retinas we created with Cortical. 
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    sfutils
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
+Remotes: JasperHG90/sfutils
+URL:
+    https://github.com/FinTxt/customFingerprinteR.git
+BugReports:
+    https://github.com/FinTxt/customFingerprinteR/issues
+License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
