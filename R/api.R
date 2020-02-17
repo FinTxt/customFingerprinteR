@@ -8,7 +8,7 @@
 check_connection <- function() {
   serv <- Sys.getenv("CUSTOMFP_SERVER")
   # Get retinas from the api
-  httr::http_error("http://localhost:5002")
+  httr::http_error(serv)
 }
 
 #' Register the address of the host server
