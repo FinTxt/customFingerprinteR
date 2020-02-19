@@ -1,6 +1,26 @@
 # customFingerprinteR
 
-This R package enables you to easily fingerprint textual data using custom retinas. 
+This R package enables you to easily fingerprint textual data using custom retinas.
+
+## Installation instructions
+
+1. Install the devtools R package on your computer. Follow the instructions given [here](https://www.rdocumentation.org/packages/devtools/versions/1.13.6).
+2. Install this library: 
+
+```r
+devtools::install_github("FinTxt/customFingerprinteR")
+```
+
+## Using the library
+
+The following image schematically shows how this package works together with the custom retina fingerprinter.
+
+![api](img/package_and_fp.png)
+
+There are two important pieces you need:
+
+1. You need to set up a custom fingerprinter API using the instructions in the [docker-fingerprinter](https://github.com/FinTxt/docker-fingerprinter) repository.
+2. 
 
 # How?
 
