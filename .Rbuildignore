@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^img
+^CHANGELOG\.md
+^README.\md
