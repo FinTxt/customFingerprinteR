@@ -63,6 +63,15 @@ fingerprint_texts <- function(records, uids, retina_name, only_fingerprint=FALSE
                                                                          "retina_name"=retina_name),
                   encode="json")
   stop_for_status(r)
+  # Get content
+  r_out <- content(r)
+  r_uids <- names(r_out)
+  rem <- which(!(uids %in% r_uids))
+  # Name records
+  names(records) <- uids
+  # Recorder records by uid
+  records <- unname(records[r_uids])
+  # Filter for records not included
   # This is an R thing: the results are returned as named lists s.t. <uid> : <list of fingerprint positions>. This is a bit annoying for computations in R.
   # What we will do is unlist the lists so they become vectors.
   r_ret <- mapply(function(x, y, z) {
@@ -88,12 +97,13 @@ fingerprint_texts <- function(records, uids, retina_name, only_fingerprint=FALSE
              fingerprint = fp)
       }
     }
-  }, content(r), records, uids)
+  }, r_out, records, r_uids)
   # Remove empty docs
-  r_ret <- r_ret[map_lgl(r_ret, function(x) !is.null(x))]
+  boolmask <- map_lgl(r_ret, function(x) !is.null(x))
+  r_ret <- r_ret[boolmask]
   # If want Collection
   if(only_fingerprint) {
-    names(r_ret) <- uids
+    names(r_ret) <- r_uids[boolmask]
   } else {
     r_ret <- r_ret %>%
       as.collection()
