@@ -1,7 +1,7 @@
 Package: customFingerprinteR
 Type: Package
 Title: Easy fingerprinting of documents using custom retinas
-Version: 0.1.0
+Version: 0.2.0
 Author: Jasper Ginn
 Maintainer: Jasper Ginn <jasperginn@gmail.com>
 Description: This package provides an interface to retrieve results from
