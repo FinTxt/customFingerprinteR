@@ -44,6 +44,7 @@ get_custom_retinas <- function() {
 #' @param records list of length k of textual data
 #' @param uids list of length k containing unique identifiers for the textual descriptions.
 #' @param retina_name name of the retina you want to use. See the 'get_retinas' function above
+#' @param only_fingerprint if TRUE, then the function will return a flat list of fingerprints. Else, it will return a list of \link[Documents]{sfutils} or \link[Terms]{sfutils} from the sfutils library.
 #'
 #' @importFrom httr POST
 #' @importFrom httr stop_for_status
@@ -53,7 +54,7 @@ get_custom_retinas <- function() {
 #' @importFrom sfutils as.collection
 #'
 #' @export
-fingerprint_texts <- function(records, uids, retina_name) {
+fingerprint_texts <- function(records, uids, retina_name, only_fingerprint=FALSE) {
   # Get name of the local server
   serv <- Sys.getenv("CUSTOMFP_SERVER")
   # Send post request
@@ -73,19 +74,30 @@ fingerprint_texts <- function(records, uids, retina_name) {
       return(NULL)
     }
     # Make document or term
-    if(nchar(y) >= 50) {
-      sfutils::Document(text = y,
-                        fingerprint = fp,
-                        uuid = z)
+    if(only_fingerprint) {
+      list(
+        "fingerprint" = fp
+      )
     } else {
-      Term(term = y,
-           fingerprint = fp)
+      if(nchar(y) >= 50) {
+        sfutils::Document(text = y,
+                          fingerprint = fp,
+                          uuid = z)
+      } else {
+        Term(term = y,
+             fingerprint = fp)
+      }
     }
-
   }, content(r), records, uids)
   # Remove empty docs
-  r_ret <- r_ret[map_lgl(r_ret, function(x) !is.null(x))] %>%
-    as.collection()
+  r_ret <- r_ret[map_lgl(r_ret, function(x) !is.null(x))]
+  # If want Collection
+  if(only_fingerprint) {
+    names(r_ret) <- uids
+  } else {
+    r_ret <- r_ret %>%
+      as.collection()
+  }
   # Return
   return(r_ret)
 }

@@ -4,7 +4,7 @@
 \alias{fingerprint_texts}
 \title{Function that fingerprints some pieces of text or terms}
 \usage{
-fingerprint_texts(records, uids, retina_name)
+fingerprint_texts(records, uids, retina_name, only_fingerprint = FALSE)
 }
 \arguments{
 \item{records}{list of length k of textual data}
@@ -12,6 +12,8 @@ fingerprint_texts(records, uids, retina_name)
 \item{uids}{list of length k containing unique identifiers for the textual descriptions.}
 
 \item{retina_name}{name of the retina you want to use. See the 'get_retinas' function above}
+
+\item{only_fingerprint}{if TRUE, then the function will return a flat list of fingerprints. Else, it will return a list of \link[Documents]{sfutils} or \link[Terms]{sfutils} from the sfutils library.}
 }
 \description{
 Function that fingerprints some pieces of text or terms
